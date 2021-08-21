@@ -2,6 +2,7 @@ const ORDER_ASC_BY_NAME = "AZ";
 const ORDER_DESC_BY_NAME = "ZA";
 var currentProductsArray = [];
 
+//Copio de categories.js y ajusto código para el ordenamiento de productos alfabéticamente
 function sortProducts(criteria, array) {
     let result = [];
     if (criteria === ORDER_ASC_BY_NAME) {
@@ -21,6 +22,7 @@ function sortProducts(criteria, array) {
     return result;
 }
 
+//Realizo función para mostrar listado de productos, tomando como base la función de mostrado de categorías
 function showProductsList() {
 
     let htmlContentToAppend = "";
@@ -50,6 +52,7 @@ function showProductsList() {
     }
 }
 
+//Función que integra el ordenamiento y el mostrado de productos según el criterio correspondiente
 function sortAndShowProducts(sortCriteria, productsArray) {
     currentSortCriteria = sortCriteria;
 

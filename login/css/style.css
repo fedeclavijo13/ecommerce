@@ -199,3 +199,17 @@ h2 {
 .control--checkbox input:disabled:checked ~ .control__indicator {
   background-color: #0066ff;
   opacity: .2; }
+
+  #animation{
+    animation-name: agrandar;
+    animation-duration: 2s;
+    animation-timing-function: ease-out;
+  }
+
+  @keyframes agrandar{
+    0%{
+      transform: scale(0.5);
+      
+    }
+  }
+  
