@@ -38,8 +38,8 @@
                   <label for="password">Contraseña</label>
                   <input type="password" class="form-control" id="password" required>
                 </div>
-
-                <input type="submit" value="Acceder" class="btn btn-block btn-primary">
+                <!-- Coloco onclick con la función para guardar la data del usuario -->
+                <input type="submit" value="Acceder" class="btn btn-block btn-primary" onclick="SaveUser()">
               </form>
             </div>
           </div>
@@ -54,6 +54,8 @@
   <script src="login/js/popper.min.js"></script>
   <script src="login/js/bootstrap.min.js"></script>
   <script src="login/js/main.js"></script>
+  <script src="js/init.js"></script>
+  <script src="js/login.js"></script>
 </body>
 
 </html>

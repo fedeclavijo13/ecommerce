@@ -19,7 +19,8 @@
 
 <body>
   <nav class="site-header sticky-top py-1 bg-secondary">
-    <div class="container d-flex flex-column flex-md-row justify-content-between">
+    <!-- Creo ID en el div del nav para añadir por JS el nombre de usuario -->
+    <div class="container d-flex flex-column flex-md-row justify-content-between" id="mostrarUsuario">
       <a class="py-2 d-none d-md-inline-block" href="inicio.html">Inicio</a>
       <a class="py-2 d-none d-md-inline-block" href="categories.html">Categorías</a>
       <a class="py-2 d-none d-md-inline-block" href="products.html">Productos</a>
@@ -36,14 +37,40 @@
     <div class="container">
       <div class="row">
         <div class="col text-right">
-          <!-- Con respecto a los botones de ordenamiento, mantengo para los productos el orden alfabético asc y desc -->
-          <div class="btn-group me-2 btn-group-toggle mb-4" data-toggle="buttons" role="group">
-            <label class="btn btn-light active" id="sortAsc">
-              <input type="radio" name="options" autocomplete="off" checked class="btn btn-secondary">A-Z
-            </label>
-            <label class="btn btn-light" id="sortDesc">
-              <input type="radio" name="options" autocomplete="off" class="btn btn-secondary">Z-A
-            </label>
+          <!-- Agrego dropdown para los ordenamientos por precio y por relevancia -->
+          <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle mb-2" type="button" id="dropdownMenuButton"
+              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Ordenar por
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <a class="dropdown-item" id="sortAsc">Menor precio</a>
+              <a class="dropdown-item" id="sortDesc">Mayor precio</a>
+              <a class="dropdown-item" id="sortBySoldCount">Relevancia</a>
+            </div>
+          </div>
+          <!-- Filtro por rango de precio -->
+          <div class="row justify-content-end">
+            <div class="col-md-6"></div>
+            <div class="col-md-6 col-sm-12 mb-1 container">
+              <div class="row container p-0 m-0">
+                <div class="col">
+                  <p class="font-weight-normal text-right my-2">Precio</p>
+                </div>
+                <div class="col">
+                  <input class="form-control" type="number" placeholder="min." id="rangeFilterCostMin">
+                </div>
+                <div class="col">
+                  <input class="form-control" type="number" placeholder="máx." id="rangeFilterCostMax">
+                </div>
+                <div class="col-3 p-0">
+                  <div class="btn-group" role="group">
+                    <button class="btn btn-secondary btn-block btn-sm" id="rangeFilterCost">Filtrar</button>
+                    <button class="btn btn-link btn-sm" id="clearRangeFilter">Limpiar</button>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
