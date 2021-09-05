@@ -40,15 +40,12 @@ var getJSONData = function (url) {
     });
 }
 
-function getAndShowUser() {
-  let usuario = localStorage.getItem('username');
-  if (usuario != undefined && usuario != '') {
-    document.getElementById('mostrarUsuario').innerHTML += `<a class="py-2 d-none d-md-inline-block" href="#">` + `<i class="far fa-user"></i>` + "  " + usuario + `</a>`;
-  }
-}
 //Función que se ejecuta una vez que se haya lanzado el evento de
 //que el documento se encuentra cargado, es decir, se encuentran todos los
 //elementos HTML presentes.
 document.addEventListener("DOMContentLoaded", function (e) {
-  getAndShowUser();
+  let usuario = localStorage.getItem('username');
+  if (usuario != undefined && usuario != '') {
+    document.getElementById('mostrarUsuario').innerHTML += `<a class="py-2 d-none d-md-inline-block" href="#">` + `<i class="far fa-user"></i>` + "  " + usuario + `</a>`;
+  }
 });
