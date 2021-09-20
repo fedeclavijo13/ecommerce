@@ -13,6 +13,7 @@
   <link href="css/font-awesome.min.css" rel="stylesheet">
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/styles.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
 </head>
 
 <body>
@@ -25,23 +26,82 @@
       <a class="py-2 d-none d-md-inline-block" href="cart.html">Mi carrito</a>
     </div>
   </nav>
-  <div class="container p-5">
-    <div class="alert alert-danger" role="alert" style="position: relative; width:auto; top: 0;">
-      <h4 class="alert-heading">¡A trabajar! :)</h4>
-      <p>Esta sección corresponde a: Entrega 3 (Fecha de entrega: 19/09/2021) y Entrega 4 (Fecha de entrega:
-        03/10/2021).</p>
-      <hr>
-      <p class="mb-0">Para saber qué debes hacer, fijate en la actividad en CREA correspondiente a esta entrega.</p>
-    </div>
-  </div>
-  <footer class="text-muted">
-    <div class="container">
-      <p class="float-right">
-        <a href="#">Volver arriba</a>
-      </p>
-      <p>Este sitio forma parte de Desarrollo Web - JAP - 2020</p>
-      <p>Clickea <a target="_blank" href="Letra.pdf">aquí</a> para descargar la letra del obligatorio.</p>
-    </div>
+
+  <!-- Reconozco patrones de información de categoría y copio contenido HTML y ajusto según las necesidades de los productos. -->
+  <main role="main">
+    <div class="container mt-3">
+      <div class="text-center p-4">
+        <h2>Descripción del producto</h2>
+        <p class="lead">Encontrarás aquí toda la información del producto seleccionado.</p>
+        <p class="small alert-warning py-3"><strong>Nota: </strong>por simplicidad, cualquiera sea el producto
+          seleccionado previamente, siempre se visualizará el presente: <strong>Chevrolet Onix Joy</strong>.</p>
+      </div>
+      <h3 id="productName"></h3>
+      <hr class="my-3">
+      <dl>
+        <dt>Descripción</dt>
+        <dd>
+          <p id="productDescription"></p>
+        </dd>
+
+        <dt>Precio</dt>
+        <dd>
+          <p id="productCost"></p>
+        </dd>
+
+        <dt>Cantidad de vendidos</dt>
+        <dd>
+          <p id="productSoldCount"></p>
+        </dd>
+
+        <dt>Categoría</dt>
+        <dd>
+          <p id="productCategory"></p>
+        </dd>
+
+        <dt>Imágenes ilustrativas</dt>
+        <dd>
+          <div class="row text-center text-lg-left pt-2" id="productImagesGallery">
+          </div>
+        </dd>
+      </dl>
+      <a type="button" class="btn btn-light btn-lg btn-block" href="products.html">Ver productos</a>
+
+      <!-- Genero apartado de comentarios, con div para cargar los comentarios por JS -->
+      <div class="container mt-3">
+        <div class="text-lg-left p-4">
+          <h2>Comentarios</h2>
+          <hr class="my-3">
+          <div id="comments">
+          </div>
+          <!-- Genero div para poder crear un comentario, y pudiendo realizar una calificación en forma de estrellas. -->
+          <div class="form-group blue-border-focus" id="formulario">
+            <hr class="my-3">
+            <textarea class="form-control" style="width: 50%;" rows="4" placeholder="Escribe aquí tu comentario..."
+              id="textarea"></textarea>
+          </div>
+          <div class="stars">
+            <form id="calif">
+              <input type="radio" id="radio1" name="stars" value="5">
+              <label for="radio1"><span class="fa fa-star"></span></label>
+              <input type="radio" id="radio2" name="stars" value="4">
+              <label for="radio2"><span class="fa fa-star"></span></label>
+              <input type="radio" id="radio3" name="stars" value="3">
+              <label for="radio3"><span class="fa fa-star"></span></label>
+              <input type="radio" id="radio4" name="stars" value="2">
+              <label for="radio4"><span class="fa fa-star"></span></label>
+              <input type="radio" id="radio5" name="stars" value="1">
+              <label for="radio5"><span class="fa fa-star"></span></label>
+            </form>
+          </div>
+          <!-- Al submit le coloco la función newComment() la cual guardará el comentario generado y lo mostrará en el listado que fue resultado de la petición del JSON. -->
+          <div class="submit">
+            <input type="submit" class="btn btn-secondary" onclick="newComment()">
+          </div>
+        </div>
+      </div>
+
+  </main>
   </footer>
   <div id="spinner-wrapper">
     <div class="lds-ring">

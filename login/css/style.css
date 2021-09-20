@@ -212,4 +212,11 @@ h2 {
       
     }
   }
+
+  .checked {
+    color: orange;
+  }
   
+  input[type= "radio"]{
+    display: none;
+  }

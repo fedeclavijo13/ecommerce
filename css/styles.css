@@ -139,3 +139,29 @@ a.custom-card:hover {
 .checked {
   color: orange;
 }
+
+input[type= "radio"]{
+  display: none;
+}
+
+label:hover,
+label:hover ~ label {
+  color: orange;
+}
+
+input[type="radio"]:checked ~ label {
+  color: orange;
+}
+
+#calif{
+  direction: rtl;
+  unicode-bidi: bidi-override;
+}
+
+.bg_new_comment{
+  background-color: rgb(255, 255, 227);
+}
+
+.bg_comments{
+  background-color: rgb(247, 247, 247);
+}
