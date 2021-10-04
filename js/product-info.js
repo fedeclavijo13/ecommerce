@@ -142,3 +142,39 @@ function newComment() {
     document.getElementById('calif').reset();
     document.getElementById('textarea').value = "";
 }
+
+//Realizo función para tomar del array los productos relacionados, recorrer la información
+//y en base a eso ir añadiendo elementos HTML para el armado de los mismos.
+function showRelated(prod, relatedProducts) {
+    let htmlContentToAppend = "";
+    for (let i = 0; i < relatedProducts.length; i++) {
+        let related = prod[relatedProducts[i]];
+
+        htmlContentToAppend += `
+     <div class="col">
+        <div class="card">
+          <img src="` + related.imgSrc + `" class="card-img-top"/>
+          <div class="card-body bg-light">
+            <h4 class="card-title font-weight-bold">` + related.name + `</h4>
+            <h5>` + product.currency + " " + product.cost + `</h5>
+            <p class="card-text text-descr font-italic">` + product.description + `</p>
+            <a href="product-info.html" class="btn btn-dark stretched-link"> Más información</a>
+          </div>
+        </div>
+      </div>
+    `
+    }
+    document.getElementById('relatedProducts').innerHTML = htmlContentToAppend;
+}
+
+//Hago petición al JSON de los productos donde tomo la información de los productos relacionados.
+//Una vez obtenida la información de forma ok, se ejecuta la función creada previamente para cargar los datos en HTML.
+document.addEventListener('DOMContentLoaded', function (e) {
+    getJSONData(PRODUCTS_URL).then(function (resultObj) {
+        if (resultObj.status === 'ok') {
+            prod = resultObj.data;
+            relatedProducts = product.relatedProducts;
+            showRelated(prod, relatedProducts);
+        }
+    });
+});

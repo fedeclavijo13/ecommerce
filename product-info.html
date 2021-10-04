@@ -18,12 +18,16 @@
 
 <body>
   <nav class="site-header sticky-top py-1 bg-secondary">
-    <div class="container d-flex flex-column flex-md-row justify-content-between" id="mostrarUsuario">
+    <div class="container d-flex flex-column flex-md-row justify-content-between">
       <a class="py-2 d-none d-md-inline-block" href="inicio.html">Inicio</a>
       <a class="py-2 d-none d-md-inline-block" href="categories.html">Categorías</a>
       <a class="py-2 d-none d-md-inline-block" href="products.html">Productos</a>
       <a class="py-2 d-none d-md-inline-block" href="sell.html">Vender</a>
-      <a class="py-2 d-none d-md-inline-block" href="cart.html">Mi carrito</a>
+      <!-- Genero campo para añadir desde JS el dropdown o en caso contrario, el "Iniciar sesión" -->
+      <ul class="nav navbar-nav mt-2">
+        <li class="dropdown" id="mostrarUsuario">
+        </li>
+      </ul>
     </div>
   </nav>
 
@@ -65,11 +69,19 @@
           </div>
         </dd>
       </dl>
-      <a type="button" class="btn btn-light btn-lg btn-block" href="products.html">Ver productos</a>
+      <a type="button" class="btn btn-light btn-lg btn-block" href="products.html">Ver lista de productos</a> <br>
+
+      <!-- Creo div para el container de productos relacionados, que se cargará desde JS. -->
+      <div>
+        <h5>Productos relacionados</h5>
+        <hr class="my-2">
+        <div class="row row-cols-1 row-cols-md-3 g-4" id='relatedProducts'>
+        </div>
+      </div>
 
       <!-- Genero apartado de comentarios, con div para cargar los comentarios por JS -->
       <div class="container mt-3">
-        <div class="text-lg-left p-4">
+        <div class="text-lg-left p-3">
           <h2>Comentarios</h2>
           <hr class="my-3">
           <div id="comments">

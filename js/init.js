@@ -43,9 +43,25 @@ var getJSONData = function (url) {
 //Función que se ejecuta una vez que se haya lanzado el evento de
 //que el documento se encuentra cargado, es decir, se encuentran todos los
 //elementos HTML presentes.
+
+//En caso de haber un usuario logueado, se carga el dropdown para visualizar carrito, "mi perfil" y cerrar sesión.
+//En caso contrario, se visualizará el link para iniciar sesión y dirigir al login.
 document.addEventListener("DOMContentLoaded", function (e) {
   let usuario = localStorage.getItem('username');
   if (usuario != undefined && usuario != '') {
-    document.getElementById('mostrarUsuario').innerHTML += `<a class="py-2 d-none d-md-inline-block" href="#">` + `<i class="far fa-user"></i>` + "  " + usuario + `</a>`;
+    document.getElementById('mostrarUsuario').innerHTML += `<a href="#" data-toggle="dropdown" class="dropdown-toggle user-action"><i class="far fa-user"></i>` + "  " + usuario + `<b class="caret"></b></a>
+    <ul class="dropdown-menu">
+    <li class="ml-2"><a href="my-profile.html"><i class="fas fa-id-card"></i> Mi perfil</a></li>
+    <li class="ml-2"><a href="cart.html"><i class="fas fa-shopping-cart"></i>` + "  " + `Ver carrito</a></li>
+    <hr class="my-2">
+    <li class="ml-2"><a href="index.html" onclick="logOut()"><i class="fas fa-power-off"></i><span>   </span>Cerrar sesión</a></li>
+  </ul>`
+  } else {
+    document.getElementById('mostrarUsuario').innerHTML += `<a href="index.html"><i class="fas fa-sign-in-alt"></i> Iniciar sesión</a></li>`
   }
 });
+
+//Genero función para eliminar usuario logueado del localStorage.
+function logOut() {
+  localStorage.removeItem('username');
+}

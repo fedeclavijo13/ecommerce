@@ -165,3 +165,10 @@ input[type="radio"]:checked ~ label {
 .bg_comments{
   background-color: rgb(247, 247, 247);
 }
+
+.text-descr{
+  max-width: 50ch;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
