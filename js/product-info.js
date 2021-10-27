@@ -84,6 +84,13 @@ document.addEventListener("DOMContentLoaded", function (e) {
             showComments(commentsArray);
         }
     });
+    getJSONData(PRODUCTS_URL).then(function (resultObj) {
+        if (resultObj.status === 'ok') {
+            prod = resultObj.data;
+            relatedProducts = product.relatedProducts;
+            showRelated(prod, relatedProducts);
+        }
+    });
 });
 
 //Función que toma la información del textarea y la calificación de estrellas y luego carga el contenido debajo de los comentarios existentes,
@@ -166,15 +173,3 @@ function showRelated(prod, relatedProducts) {
     }
     document.getElementById('relatedProducts').innerHTML = htmlContentToAppend;
 }
-
-//Hago petición al JSON de los productos donde tomo la información de los productos relacionados.
-//Una vez obtenida la información de forma ok, se ejecuta la función creada previamente para cargar los datos en HTML.
-document.addEventListener('DOMContentLoaded', function (e) {
-    getJSONData(PRODUCTS_URL).then(function (resultObj) {
-        if (resultObj.status === 'ok') {
-            prod = resultObj.data;
-            relatedProducts = product.relatedProducts;
-            showRelated(prod, relatedProducts);
-        }
-    });
-});
