@@ -48,6 +48,7 @@ function subtotal(subtCost) {
     }
     document.getElementById("subt" + subtCost).innerHTML = st * cost;
     total()
+    shippingCost()
 }
 
 //Creo función para terminar de calcular el total del pedido y enviarlo al HTML
@@ -60,4 +61,30 @@ function total() {
     document.getElementById("total").innerHTML = sum;
 }
 
+function methodPaymentCheck() {
+    if (document.getElementById('creditCheck').checked) {
+        document.getElementById('creditYes').style.display = 'block';
+    }
+    else document.getElementById('creditYes').style.display = 'none';
 
+    if (document.getElementById('transferCheck').checked) {
+        document.getElementById('transferYes').style.display = 'block';
+    }
+    else document.getElementById('transferYes').style.display = 'none';
+}
+
+function shippingCost() {
+    var shippingCost = 0;
+
+    if (document.getElementById('premium').checked) {
+        shippingCost = Math.round((total) * 0.15);
+    }
+    if (document.getElementById('express').checked) {
+        shippingCost = Math.round((total) * 0.07);
+    }
+    if (document.getElementById('standard').checked) {
+        shippingCost = Math.round((total) * 0.05);
+    }
+
+    document.getElementById('costoEnv').innerHTML = shippingCost;
+}

@@ -15,6 +15,7 @@
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/styles.css" rel="stylesheet">
   <link href="css/dropzone.css" rel="stylesheet">
+  <!-- <link rel="stylesheet" href="css/cart.css"> -->
 </head>
 
 <body>
@@ -68,11 +69,11 @@
         <label for="localidad">Localidad</label>
         <input type="text" class="form-control">
       </div>
-      <div class="col-md-12 p-2">
+      <div class="col-md-8 p-2">
         <label for="calle">Calle</label>
         <input type="text" class="form-control">
       </div>
-      <div class="col-md-12 p-2">
+      <div class="col-md-4 p-2">
         <label for="numPuerta">Número/Apto</label>
         <input type="number" class="form-control">
       </div>
@@ -92,15 +93,15 @@
     </div>
     <div class="d-block my-3 justify-content-md-center">
       <div class="custom-control custom-radio">
-        <input id="premium" name="publicationType" type="radio" class="custom-control-input" required="">
+        <input id="premium" name="shippingType" type="radio" class="custom-control-input" required="">
         <label class="custom-control-label" for="premium">Premium (15%) (2-5 días) </label>
       </div>
       <div class="custom-control custom-radio">
-        <input id="express" name="publicationType" type="radio" class="custom-control-input" required="">
+        <input id="express" name="shippingType" type="radio" class="custom-control-input" required="">
         <label class="custom-control-label" for="express">Express (7%) (5-8 días)</label>
       </div>
       <div class="custom-control custom-radio">
-        <input id="standard" name="publicationType" type="radio" class="custom-control-input" required="">
+        <input id="standard" name="shippingType" type="radio" class="custom-control-input" required="">
         <label class="custom-control-label" for="standard">Standard (5%) (12-15 días)</label>
       </div>
     </div>
@@ -111,14 +112,8 @@
   <div class="container">
     <h3>Método de pago</h3>
     <div class="d-block my-3 justi">
-      <div class="custom-control custom-radio">
-        <input id="credit" name="pay" type="radio" class="custom-control-input" required="">
-        <label class="custom-control-label" for="credit">Tarjeta de crédito</label>
-      </div>
-      <div class="custom-control custom-radio">
-        <input id="transf" name="pay" type="radio" class="custom-control-input" required="">
-        <label class="custom-control-label" for="transf">Transferencia bancaria</label>
-      </div>
+      <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#PaymentMethodModal">Seleccionar
+        método de pago</button>
     </div>
     <hr class="mb-6">
   </div>
@@ -126,7 +121,27 @@
   <!-- Coloco el apartado para poder indicar el costo total del pedido, el cual se tomará por JavaScript, y también
   los controles gráficos para confirmar compra o seguir comprando -->
   <div class="container">
-    <h3>Costo total: <strong>USD</strong> <strong id="total">-</strong> </h3>
+    <h4 class="mb-3">Costos</h4>
+    <ul class="list-group mb-3">
+      <li class="list-group-item d-flex justify-content-between lh-condensed">
+        <div>
+          <h6 class="my-0">Subtotal (USD)</h6>
+          <small class="text-muted">Carrito de productos</small>
+        </div>
+        <span class="text-muted" id="total">-</span>
+      </li>
+      <li class="list-group-item d-flex justify-content-between lh-condensed">
+        <div>
+          <h6 class="my-0">Costo de envío</h6>
+          <small class="text-muted">Según el tipo de envío elegido</small>
+        </div>
+        <span class="text-muted" id="costoEnv">-</span>
+      </li>
+      <li class="list-group-item d-flex justify-content-between">
+        <span>Total ($)</span>
+        <strong id="totalCostText">-</strong>
+      </li>
+    </ul>
     <button class="btn btn-success btn-lg mt-1" type="submit">Confirmar compra</button><br>
     <button class="btn btn-dark btn-sm mt-1" type="submit">Seguir comprando</button>
   </div>
@@ -134,6 +149,81 @@
   </div>
   </div>
   <hr class="mb-4">
+  </div>
+
+  <div class="modal fade" tabindex="-1" role="dialog" id="PaymentMethodModal">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Método de pago</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form action="#">
+            <div class="container">
+              <div class="row">
+                <div class="custom-control custom-radio">
+                  <input type="radio" onclick="methodPaymentCheck();" id="creditCheck" name="methodPayment"
+                    class="custom-control-input">
+                  <label class="custom-control-label" for="creditCheck">Tarjeta de crédito</label>
+
+                  <div id="creditYes" style="display: none;">
+                    <div class="form-row">
+                    </div>
+                    <div class="form-group">
+                      <input type="text" class="form-control" id="inputAddress"
+                        placeholder="Nombre de titular de la tarjeta">
+                    </div>
+                    <div class="form-group">
+                      <input type="text" class="form-control" id="inputAddress2" placeholder="Número de la tarjeta">
+                    </div>
+                    <div class="form-row">
+                      <div class="form-group col-md-6">
+                        <input type="text" class="form-control" id="caducidad" placeholder="Fecha de caducidad">
+                      </div>
+                      <div class="form-group col-md-6">
+                        <input type="text" class="form-control" id="cvv" placeholder="CVV">
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="custom-control custom-radio">
+                  <input type="radio" onclick="methodPaymentCheck();" id="transferCheck" name="methodPayment"
+                    class="custom-control-input">
+                  <label class="custom-control-label" for="transferCheck">Transferencia bancaria</label>
+                  <div id="transferYes" style="display: none;">
+                    <div class="form-row">
+                    </div>
+                    <div class="form-row">
+                      <div class="form-group col-md-12">
+                        <input type="text" class="form-control" id="caducidad" placeholder="Banco">
+                      </div>
+                      <div class="form-group col-md-12">
+                        <input type="text" class="form-control" id="cvv" placeholder="Número de cuenta">
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  </div>
+  </div>
   </div>
 
   <div id="spinner-wrapper">
