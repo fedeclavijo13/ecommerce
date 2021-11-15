@@ -55,24 +55,26 @@ function showProductsList() {
         if (((minCost == undefined) || (minCost != undefined && parseInt(product.cost) >= minCost)) &&
             ((maxCost == undefined) || (maxCost != undefined && parseInt(product.cost) <= maxCost))) {
 
-            htmlContentToAppend += `
-            <a href="product-info.html" class="list-group-item list-group-item-action">
-                <div class="row">
-                    <div class="col-3">
-                        <img src="` + product.imgSrc + `" alt="` + product.description + `" class="img-thumbnail">
-                    </div>
-                    <div class="col">
-                        <div class="d-flex w-100 justify-content-between">
-                            <h4 class="mb-1" style="font-size: 180%;">`+ product.name + `</h4>
-                            <small class="text-muted">` + product.soldCount + ` vendidos</small>
-                        </div><br>
-                        <b class="mb-1" style="font-size: 150%;">` + product.currency + ` ` + product.cost + ` </b><br>
-                        <br>
-                        <p class="mb-1">` + product.description + `</p>
-                    </div>
+            htmlContentToAppend += `<div class="col-xs-12 col-sm-4">
+            <div class="card bg-light">
+                <a class="img-card" href="product-info.html">
+                <img src="` + product.imgSrc + `" alt="` + product.description + `" class = "img-thumbnail">
+              </a>
+                <div class="card-content">
+                    <h4 class="card-title">
+                        <a href="product-info.html">` + product.name + `
+                      </a>
+                    </h4>
+                    <b class="mb-1" style="font-size: 120%;">` + product.currency + ` ` + product.cost + ` </b><br>
+                    <p>` + product.description + `</p>
                 </div>
-            </a>
-            `
+                <div class="card-read-more">
+                    <a href="product-info.html" class="btn btn-link btn-block">
+                        Ver más
+                    </a>
+                </div>
+            </div>
+            </div>`
         }
 
         document.getElementById("prod-list-container").innerHTML = htmlContentToAppend;
